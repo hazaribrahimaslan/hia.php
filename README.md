@@ -9,6 +9,8 @@
   <li>E-posta adresi kontrolü.</li>
   <li>İnternet adresi kontrolü.</li>
   <li>Sayfa oluşturma ve yazdırma.</li>
+  <li>Tablo oluşturma.</li>
+  <li>Form oluşturma.</li>
   <li>PHPMailer ile E-posta gönderme.</li>
 </ul>
 <p><b>Dosyalar</b></p>
