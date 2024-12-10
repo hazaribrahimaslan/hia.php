@@ -1,4 +1,5 @@
 <?php
+/* hia.php */
 class hia{
     private $database, $database_name, $database_username, $database_password,
         $email_address, $email_password, $email_host;
@@ -6,12 +7,18 @@ class hia{
         ob_start();
         session_start();
         /*Veritabanı ayarları*/
+        /*veritabanı adı*/
         $this->database_name = "";
+        /*veritabanı kullanıcı adı*/
         $this->database_username = "";
+        /*veritabanı kullanıcı parolası*/
         $this->database_password = "";
         /*E-posta ayarları*/
+        /*e-posta host adresi | örnek : mail.siteadresi.tr */
         $this->email_host = "";
+        /*e-posta adresi*/
         $this->email_address = "";
+        /*e-posta parolası*/
         $this->email_password = "";
     }
     /*veritabanı bağlantı fonksiyonu*/
@@ -79,6 +86,7 @@ class hia{
     /*PHPMailer ile e-posta gönderme fonksiyonu*/
     public function email_send($email, $subject, $body)
     {
+        /*phpmailer sınıfını ekle*/
         require("class.phpmailer.php");
         $mail = new PHPMailer();
         $mail->IsSMTP();
@@ -168,58 +176,52 @@ class hia{
 
     }
     /*tablo oluşturma fonksiyonu*/
-    public function table_create(array $column_values, $row_values){
-        return "<table></table>";
+    public function table_create(array $column_values, array $row_values){
+        $column_count = count($column_values);
+        for($i=0;$i<$column_count;$i++){
+            $columns .= "<th>".$column_values[$i]."</th>";
+        }
+        $row_count = count($row_values);
+        for($i=0;$i<$row_count;$i++){
+            $columns .= "";
+        }
+        return "<table>
+        <tr>
+        $columns
+        </tr>
+        </table>";
     }
     /*form oluşturma fonksiyonu*/
-    public function form_create(string $form_method,$form_action,array $inputs){
-        if($input_type == "select"){
-            $input_id = "";
-            $input_name = "";
-            $option_array = "";
-            $option_key = "";
-            $option_value = "";
-        }
-        else if($input_type == "text"){
-            $input_id = "";
-            $input_name = "";
-            $input_type = "";
-            $input_value = "";
-            $min_len = "";
-            $max_len = "";
-            $input_required = "";
-            $input_auto = "";
-        }
-        else if($input_type == "email"){
-            $input_id = "";
-            $input_name = "";
-            $input_type = "";
-            $input_value = "";
-            $input_required = "";
-            $input_auto = "";
-        }
-        else if($input_type == "url"){
-            $input_id = "";
-            $input_name = "";
-            $input_type = "";
-            $input_value = "";
-            $min_len = "";
-            $max_len = "";
-            $input_required = "";
-            $input_auto = "";
-        }
-        else if($input_type == "number"){
-            $input_id = "";
-            $input_name = "";
-            $input_type = "";
-            $input_value = "";
-            $input_required = "";
-            $min = "";
-            $max = "";
-            $input_required = "";
-            $input_auto = "";
-        }
+    public function form_create(string $form_method,$form_action,$form_inputs){
+        return "<form method=\"$form_method\" action=\"$form_action\">
+        $form_inputs
+        </form>";
     }
+    public function form_select_input_create($id,$name,$option_array){
+        /*opsiyon dizisinin anahtar değerlerini al*/
+        $array_keys = array_keys($option_array);
+        /*opsiyon dizisini say*/
+        $count = count($option_array);
+        for($i=0;$i<$count;$i++){
+            /*anahtar değerini al*/
+            $option_value_key = $array_keys[$i];
+            /*anahtar değerine göre değerini al*/
+            $option_value = $data[$option_array];   
+            /*opsiyonu oluştur*/
+            $option .= "<option value=\"$option_value_key\">$option_value</option>"; 
+        }
+        /*select input oluştur ve geri döndür*/
+        return "<select id=\"$id\" name=\"$name\">$option</select>";
+    } 
+    public function form_text_input_create($id,$name,$min_len,$max_len,$autocomplate,$required){
+
+    }
+    public function form_number_input_create(){
+
+    }    
+    public function form__input_create(){
+
+    } 
     /*sayfa oluşturma ve yazdırma fonksiyonu*/
     public function page_show($icon,$title,$description,$body){
         print "<html>
