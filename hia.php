@@ -14,17 +14,16 @@ class hia{
         $this->email_address = "";
         $this->email_password = "";
     }
+    /*veritabanı bağlantı fonksiyonu*/
     public function database_connect()
     {
         $this->database = new PDO("mysql:host=localhost;dbname=$this->database_name;charset=utf8", "$this->database_username", "$this->database_password");
     }
-
     /*Veritabanı bağlantısını kesme fonksiyonu*/
     public function database_disconnect()
     {
         $this->database = null;
     }
-
     /*Veri sorgulama fonksiyonu*/
     public function data_select($query)
     {
