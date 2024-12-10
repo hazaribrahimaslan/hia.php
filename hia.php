@@ -173,7 +173,52 @@ class hia{
     }
     /*form oluşturma fonksiyonu*/
     public function form_create(string $form_method,$form_action,array $inputs){
-        
+        if($input_type == "select"){
+            $input_id = "";
+            $input_name = "";
+            $option_array = "";
+            $option_key = "";
+            $option_value = "";
+        }
+        else if($input_type == "text"){
+            $input_id = "";
+            $input_name = "";
+            $input_type = "";
+            $input_value = "";
+            $min_len = "";
+            $max_len = "";
+            $input_required = "";
+            $input_auto = "";
+        }
+        else if($input_type == "email"){
+            $input_id = "";
+            $input_name = "";
+            $input_type = "";
+            $input_value = "";
+            $input_required = "";
+            $input_auto = "";
+        }
+        else if($input_type == "url"){
+            $input_id = "";
+            $input_name = "";
+            $input_type = "";
+            $input_value = "";
+            $min_len = "";
+            $max_len = "";
+            $input_required = "";
+            $input_auto = "";
+        }
+        else if($input_type == "number"){
+            $input_id = "";
+            $input_name = "";
+            $input_type = "";
+            $input_value = "";
+            $input_required = "";
+            $min = "";
+            $max = "";
+            $input_required = "";
+            $input_auto = "";
+        }
     }
     /*sayfa oluşturma ve yazdırma fonksiyonu*/
     public function page_show($icon,$title,$description,$body){
