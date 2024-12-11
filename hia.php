@@ -245,15 +245,15 @@ class hia{
         return "<input type=\"number\" id=\"$id\" name=\"$name\" min=\"$min\" max=\"$max\" autocomplete=\"$autocomplete\" required=\"$required\">";
     } 
     public function form_input_file($id,$name,$min,$max,$accept){
-        /*sayısal input oluştur ve gönder*/
+        /*dosya input oluştur ve gönder*/
         return "<input type=\"file\" id=\"$id\" name=\"$name\" accept=\"$accept\" required=\"$required\">";
     } 
     public function form_input_button($id,$type,$value,$onclick){
-        /*sayısal input oluştur ve gönder*/
+        /*buton input oluştur ve gönder*/
         return "<button type=\"$type\" id=\"$id\" onclick=\"$onclick\">$value</button>";
     }
-    public function form_request_control(){
-        if($_SERVER['REQUEST_METHOD']=="POST"){
+    public function form_request_control($method){
+        if($_SERVER['REQUEST_METHOD']=="$method"){
             return true;
         }else{
             return false;
