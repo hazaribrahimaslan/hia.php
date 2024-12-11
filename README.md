@@ -9,6 +9,10 @@
   <li>E-posta adresi kontrolü.</li>
   <li>İnternet adresi kontrolü.</li>
   <li>Sayfa oluşturma ve yazdırma.</li>
+  <li>Başlık ve menü oluşturma.</li>
+  <li>Başlık oluşturma.</li>
+  <li>Paragraf metni oluşturma.</li>
+  <li>Link oluşturma.</li>
   <li>Tablo oluşturma.</li>
   <li>Form oluşturma.</li>
   <li>PHPMailer ile E-posta gönderme.</li>
