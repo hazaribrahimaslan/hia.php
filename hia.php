@@ -193,6 +193,8 @@ class hia{
     }
     /*form oluşturma fonksiyonu*/
     public function form_create(string $form_method,$form_action,$form_inputs){
+        /*örnek:
+        */
         return "<form method=\"$form_method\" action=\"$form_action\">
         $form_inputs
         </form>";
@@ -206,22 +208,45 @@ class hia{
             /*anahtar değerini al*/
             $option_value_key = $array_keys[$i];
             /*anahtar değerine göre değerini al*/
-            $option_value = $data[$option_array];   
+            $option_value = $option_array[$option_value_key];   
             /*opsiyonu oluştur*/
             $option .= "<option value=\"$option_value_key\">$option_value</option>"; 
         }
-        /*select input oluştur ve geri döndür*/
+        /*select input oluştur ve gönder*/
         return "<select id=\"$id\" name=\"$name\">$option</select>";
     } 
-    public function form_text_input_create($id,$name,$min_len,$max_len,$autocomplate,$required){
-
+    public function form_text_input_create($id,$name,$minlength,$maxlength,$autocomplete,$required){
+        /*autocomplete = on/off
+        reuired = required
+        */
+        /*metinsel input oluştur ve gönder*/
+        return "<input type=\"text\" id=\"$id\" name=\"$name\" minlength=\"$minlength\" maxlength=\"$maxlength\" autocomplete=\"$autocomplete\" required=\"$required\">";
     }
-    public function form_number_input_create(){
-
+    public function form_email_input_create($id,$name,$autocomplete,$required){
+        /*autocomplete = on/off
+        reuired = required
+        */
+        /*e-posta input oluştur ve gönder*/
+        return "<input type=\"email\" id=\"$id\" name=\"$name\" autocomplete=\"$autocomplete\" required=\"$required\">";
+    }
+    public function form_url_input_create($id,$name,$autocomplete,$required){
+        /*autocomplete = on/off
+        reuired = required
+        */
+        /*url input oluştur ve gönder*/
+        return "<input type=\"url\" id=\"$id\" name=\"$name\" autocomplete=\"$autocomplete\" required=\"$required\">";
+    }
+    public function form_date_input_create($id,$name,$min,$max,$required){
+        /*reuired = required 
+        min-max : year-month-day 2025-01-01 gibi
+        */
+        /*tarih input oluştur ve gönder*/
+        return "<input type=\"date\" id=\"$id\" name=\"$name\" min=\"$min\" max=\"$max\" required=\"$required\">";
+    }
+    public function form_number_input_create($id,$name,$min,$max){
+        /*sayısal input oluştur ve gönder*/
+        return "<input type=\"number\" id=\"$id\" name=\"$name\" min=\"$min\" max=\"$max\" autocomplete=\"$autocomplete\" required=\"$required\">";
     }    
-    public function form__input_create(){
-
-    } 
     /*sayfa oluşturma ve yazdırma fonksiyonu*/
     public function page_show($icon,$title,$description,$body){
         print "<html>
