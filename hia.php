@@ -1,12 +1,12 @@
 <?php
-/* hia.php */
+/*hia.php*/
 class hia{
     private $database, $database_name, $database_username, $database_password,
         $email_address, $email_password, $email_host;
     public function __construct(){
         ob_start();
         session_start();
-        /*Veritabanı ayarları*/
+        /*veritabanı ayarları*/
         /*veritabanı adı*/
         $this->database_name = "";
         /*veritabanı kullanıcı adı*/
@@ -22,18 +22,15 @@ class hia{
         $this->email_password = "";
     }
     /*veritabanı bağlantı fonksiyonu*/
-    public function database_connect()
-    {
+    public function database_connect(){
         $this->database = new PDO("mysql:host=localhost;dbname=$this->database_name;charset=utf8", "$this->database_username", "$this->database_password");
     }
     /*Veritabanı bağlantısını kesme fonksiyonu*/
-    public function database_disconnect()
-    {
+    public function database_disconnect(){
         $this->database = null;
     }
     /*Veri sorgulama fonksiyonu*/
-    public function data_select($query)
-    {
+    public function data_select($query){
         self::database_connect();
         $sth = $this->database->prepare("$query");
         $sth->execute();
@@ -42,8 +39,7 @@ class hia{
         self::database_disconnect();
     }
     /*veri ekleme fonksiyonu*/
-    public function data_insert($table_name, array $data_array)
-    {
+    public function data_insert($table_name, array $data_array){
         $array_keys = array_keys($data_array);
         $array_count = count($data_array);
         for($i=0;$i<$count;$i++){
@@ -64,8 +60,7 @@ class hia{
         self::database_disconnect();
     }
     /*veri güncelleme fonksiyonu*/
-    public function data_update($table_name, $column, $data, $condition)
-    {
+    public function data_update($table_name, $column, $data, $condition){
         self::database_connect();
         try {
             $this->database->exec("UPDATE $table SET $column='$data' WHERE $condition");
@@ -74,8 +69,7 @@ class hia{
         self::database_disconnect();
     }
     /*veri silme fonksiyonu*/
-    public function data_delete($table, $where)
-    {
+    public function data_delete($table, $where){
         self::database_connect();
         try {
             $this->database->exec("DELETE FROM $table WHERE $where");
@@ -84,8 +78,7 @@ class hia{
         self::database_disconnect();
     }
     /*PHPMailer ile e-posta gönderme fonksiyonu*/
-    public function email_send($email, $subject, $body)
-    {
+    public function email_send($email, $subject, $body){
         /*phpmailer sınıfını ekle*/
         require("class.phpmailer.php");
         $mail = new PHPMailer();
@@ -176,30 +169,34 @@ class hia{
 
     }
     /*tablo oluşturma fonksiyonu*/
-    public function table_create(array $column_values, array $row_values){
+    public function table(array $column_values, array $row_values){
         $column_count = count($column_values);
         for($i=0;$i<$column_count;$i++){
             $columns .= "<th>".$column_values[$i]."</th>";
         }
         $row_count = count($row_values);
         for($i=0;$i<$row_count;$i++){
-            $columns .= "";
+            for($j=0;$j<$column_count;$j++){
+                $row_column .= "";
+            }
+            $rows .= "<tr></tr>";
         }
         return "<table>
-        <tr>
-        $columns
-        </tr>
+        <tr>$columns</tr>
+        $rows
         </table>";
     }
     /*form oluşturma fonksiyonu*/
-    public function form_create(string $form_method,$form_action,$form_inputs){
+    public function form(string $form_method,$form_action,array $form_input_array){
+        $form_input_array_count = count($form_input_array);
+        for($i=0;$i<$form_input_array_count;$i++){
+            $form_input .= $form_input_array[$i];
+        }
         /*örnek:
         */
-        return "<form method=\"$form_method\" action=\"$form_action\" enctype=\"multipart/form-data\">
-        $form_inputs
-        </form>";
+        return "<form method=\"$form_method\" action=\"$form_action\" enctype=\"multipart/form-data\">$form_input</form>";
     }
-    public function form_input_select_create($id,$name,$option_array){
+    public function form_input_select($id,$name,$option_array){
         /*opsiyon dizisinin anahtar değerlerini al*/
         $array_keys = array_keys($option_array);
         /*opsiyon dizisini say*/
@@ -215,44 +212,54 @@ class hia{
         /*select input oluştur ve gönder*/
         return "<select id=\"$id\" name=\"$name\">$option</select>";
     } 
-    public function form_input_text_create($id,$name,$minlength,$maxlength,$autocomplete,$required){
+    public function form_input_text($id,$name,$minlength,$maxlength,$autocomplete,$required){
         /*autocomplete = on/off
         reuired = required
         */
         /*metinsel input oluştur ve gönder*/
         return "<input type=\"text\" id=\"$id\" name=\"$name\" minlength=\"$minlength\" maxlength=\"$maxlength\" autocomplete=\"$autocomplete\" required=\"$required\">";
     }
-    public function form_input_email_create($id,$name,$autocomplete,$required){
+    public function form_input_email($id,$name,$autocomplete,$required){
         /*autocomplete = on/off
         reuired = required
         */
         /*e-posta input oluştur ve gönder*/
         return "<input type=\"email\" id=\"$id\" name=\"$name\" autocomplete=\"$autocomplete\" required=\"$required\">";
     }
-    public function form_input_url_create($id,$name,$autocomplete,$required){
+    public function form_input_url($id,$name,$autocomplete,$required){
         /*autocomplete = on/off
         reuired = required
         */
         /*url input oluştur ve gönder*/
         return "<input type=\"url\" id=\"$id\" name=\"$name\" autocomplete=\"$autocomplete\" required=\"$required\">";
     }
-    public function form_input_date_create($id,$name,$min,$max,$required){
+    public function form_input_date($id,$name,$min,$max,$required){
         /*reuired = required 
         min-max : year-month-day 2025-01-01 gibi
         */
         /*tarih input oluştur ve gönder*/
         return "<input type=\"date\" id=\"$id\" name=\"$name\" min=\"$min\" max=\"$max\" required=\"$required\">";
     }
-    public function form_input_number_create($id,$name,$min,$max){
+    public function form_input_number($id,$name,$min,$max){
         /*sayısal input oluştur ve gönder*/
         return "<input type=\"number\" id=\"$id\" name=\"$name\" min=\"$min\" max=\"$max\" autocomplete=\"$autocomplete\" required=\"$required\">";
     } 
-    public function form_input_file_create($id,$name,$min,$max,$accept){
+    public function form_input_file($id,$name,$min,$max,$accept){
         /*sayısal input oluştur ve gönder*/
         return "<input type=\"file\" id=\"$id\" name=\"$name\" accept=\"$accept\" required=\"$required\">";
     }   
+    public function form_request_control(){
+        if($_SERVER['REQUEST_METHOD']=="POST"){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function title($no,$text){
+        return "<h$no>$text</h$no>";
+    }
     /*sayfa oluşturma ve yazdırma fonksiyonu*/
-    public function page_show($icon,$title,$description,$body){
+    public function page($icon,$title,$description,$body){
         print "<html>
         <head>
         <meta charset=\"UTF-8\">
