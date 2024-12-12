@@ -20,8 +20,8 @@
 <p><b>Dosyalar</b></p>
 <ul>
   <li>hia.php : php kütüphanesi</li>
-  <li>hia.css : HTML sayfalar için yalın tasarım.</li>
-  <li>index.php : Örnek sayfa.</li>
+  <li>hia.css : stil dosyası.</li>
+  <li>index.php : örnek sayfa.</li>
 </ul>
 <p><b>Örnek kullanımı</b></p>
 <code>
