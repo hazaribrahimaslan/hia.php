@@ -194,7 +194,7 @@ class hia
     /*dosya yükleme fonksiyonu*/
     public function file_upload($file, $folder, $file_ext, $max_mb)
     {
-
+        
     }
 
     /*tablo oluşturma fonksiyonu*/
@@ -301,13 +301,8 @@ class hia
         return "<button type=\"$type\" id=\"$id\" onclick=\"$onclick\">$value</button>";
     }
 
-    public function form_request_control($method)
-    {
-        if ($_SERVER['REQUEST_METHOD'] == "$method") {
-            return true;
-        } else {
-            return false;
-        }
+    public function header_nav($title,array $nav_item_array){
+
     }
 
     public function title($no, $text)
@@ -325,6 +320,7 @@ class hia
         <title>$title</title>
         <meta name=\"description\" content=\"$description\">
         <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+        <style>".file_get_contents("hia.css")."</style>
         </head>
         <body>
         $body
