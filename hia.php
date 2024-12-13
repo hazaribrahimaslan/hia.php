@@ -289,7 +289,7 @@ class hia
         return "<input type=\"number\" id=\"$id\" name=\"$name\" min=\"$min\" max=\"$max\" autocomplete=\"$autocomplete\" required=\"$required\">";
     }
 
-    public function form_input_file($id, $name, $min, $max, $accept, $required)
+    public function form_input_file($id, $name, $accept, $required)
     {
         /*dosya input oluştur ve gönder*/
         return "<input type=\"file\" id=\"$id\" name=\"$name\" accept=\"$accept\" required=\"$required\">";
