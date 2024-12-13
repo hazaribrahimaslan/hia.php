@@ -4,29 +4,28 @@
 <ul>
   <li>Veritabanı bağlantısı.</li>
   <li>Veri sorgulama,listeleme, ekleme, güncelleme ve silme.</li>
-  <li>Metin kontrolü.</li>
-  <li>Sayı kontrolü.</li>
-  <li>E-posta adresi kontrolü.</li>
-  <li>İnternet adresi kontrolü.</li>
+  <li>Veri türünü ve uzunluğunu kontrol etme.</li>
+  <li>PHPMailer ile E-posta gönderme.</li>
+  <li>Dosya yükleme.</li>
   <li>Sayfa oluşturma ve yazdırma.</li>
   <li>Başlık ve menü oluşturma.</li>
-  <li>Başlık oluşturma.</li>
-  <li>Paragraf metni oluşturma.</li>
-  <li>Link oluşturma.</li>
+  <li>Başlık, paragraf ve link oluşturma.</li>
   <li>Tablo oluşturma.</li>
   <li>Form oluşturma.</li>
-  <li>PHPMailer ile E-posta gönderme.</li>
 </ul>
 <p><b>Dosyalar</b></p>
 <ul>
-  <li>hia.php : php kütüphanesi</li>
-  <li>hia.css : stil dosyası.</li>
+  <li>hia.php : php kütüphanesi. Kütüpheneyi kullanacağınız dosyalara inlude etmeniz yeterli.</li>
+  <li>hia.css : stil dosyasıdır.</li>
   <li>index.php : örnek sayfa.</li>
 </ul>
 <p><b>Örnek kullanımı</b></p>
 <code>
 include "hia.php";
 $hia = new hia();
-$body = "Merhaba dünya!";
-$hia->page_show("favicon.ico","Sayfa başlığı","Sayfa açıklaması","$body");
+$hia->page("icon.png",
+    "Merhaba dünya!",
+    "Bu bir hia.php merhaba dünya sayfası.",
+    $hia->title("1", "Merhaba Dünya!")
+);
 </code>
